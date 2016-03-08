@@ -10,7 +10,11 @@ import java.util.List;
  * Created by vladislav on 08.03.16.
  */
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    final String query = "select e from Employee e " +
+            "where upper(e.lastName) like upper(?1) " +
+            "and upper(e.firstName) like upper(?2) " +
+            "and upper(e.middleName) like upper(?3)";
 
-    @Query("select e from Employee e where e.lastName like ?1 and e.firstName like ?2 and e.middleName like ?3")
+    @Query(query)
     List<Employee> filterQuery(String lastName, String firstName, String middleName);
 }

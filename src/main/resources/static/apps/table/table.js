@@ -20,7 +20,7 @@ angular.module('table', [ 'ngResource' ])
         function ($scope, TableService) {
             $scope.employees = { };
 
-            $scope.init = function () {
+            $scope.search = function () {
                 TableService.readAll({ },
                     function (employees) {
                         $scope.employees = employees;
@@ -30,6 +30,24 @@ angular.module('table', [ 'ngResource' ])
                     })
             };
 
-            $scope.init();
+            $scope.search();
+
+            $scope.$watch('lastName', function(val, oldVal) {
+                if(val && val != oldVal) {
+                    $scope.search();
+                }
+            });
+
+            $scope.$watch('firstName', function(val, oldVal) {
+                if(val && val != oldVal) {
+                    $scope.search();
+                }
+            });
+
+            $scope.$watch('middleName', function(val, oldVal) {
+                if(val && val != oldVal) {
+                    $scope.search();
+                }
+            });
         }
     ]);
