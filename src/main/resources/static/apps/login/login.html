@@ -1,13 +1,15 @@
-<div class="container-fluid">
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label>Логин</label>
-            <input class="form-control" name="username" placeholder="Логин">
-        </div>
-        <div class="form-group">
-            <label>Пароль</label>
-            <input type="password" class="form-control" name="password" placeholder="Пароль">
-        </div>
-        <button type="submit" class="btn btn-default">Войти</button>
-    </form>
+<div style="text-align: center;">
+    <div class="container-fluid" style="max-width: 380px; text-align: left">
+        <form action="/login/process" method="post">
+            <div class="form-group">
+                <label>Логин</label>
+                <input class="form-control" name="username" placeholder="Логин">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" class="form-control" name="password" placeholder="Пароль">
+            </div>
+            <button type="submit" class="btn btn-default">Войти</button>
+        </form>
+    </div>
 </div>

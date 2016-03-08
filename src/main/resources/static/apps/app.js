@@ -1,14 +1,15 @@
 'use strict';
 
-var testApp = angular.module('testApp', [ 'ngRoute' ]);
+var testApp = angular.module('testApp', [ 'ngRoute', 'table' ]);
 
 testApp.config(function($routeProvider, $locationProvider) {
 
     $routeProvider
-        //.when('/issues', {
-        //    templateUrl : 'apps/issues/issues.html',
-        //    controller : 'IssuesCtrl'
-        //})
+        .when('/table', {
+            templateUrl : 'apps/table/table.html',
+            controller : 'TableCtrl'
+        })
+
         .when('/login', {
             templateUrl : 'apps/login/login.html'
         })
