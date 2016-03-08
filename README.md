@@ -9,7 +9,7 @@ will generate some sample data on startup.
 **Usage:**  
 1. clone this repo  
 2. execute `mvn spring-boot:run`  
-3. go to http://localhost:8080/ and login  
+3. go to [localhost:8080](http://localhost:8080/) and login  
 4. table is updated as you type the search query  
 
 **Credentials:**  
