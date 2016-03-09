@@ -2,27 +2,27 @@
     <div class="container-fluid" style="max-width: 380px;">
         <form>
             <div class="form-group">
-                <input class="form-control" ng-model="lastName" placeholder="Фамилия...">
+                <input class="form-control" ng-model="lastName" ng-model-options="{ debounce: 250 }" placeholder="Фамилия...">
             </div>
             <div class="form-group">
-                <input class="form-control" ng-model="firstName" placeholder="Имя...">
+                <input class="form-control" ng-model="firstName" ng-model-options="{ debounce: 250 }" placeholder="Имя...">
             </div>
             <div class="form-group">
-                <input class="form-control" ng-model="middleName" placeholder="Отчество...">
+                <input class="form-control" ng-model="middleName" ng-model-options="{ debounce: 250 }" placeholder="Отчество...">
             </div>
             <div class="form-group">
-                <input class="form-control" ng-model="position" placeholder="Должность...">
+                <input class="form-control" ng-model="position" ng-model-options="{ debounce: 250 }" placeholder="Должность...">
             </div>
             <div class="form-group" style="padding-bottom: 30px">
                 <label>Дата рождения от:</label>
                 <datepicker date-format="dd.MM.yyyy">
-                    <input class="form-control" ng-model="birthdayFrom" type="text" value="01.01.1970"/>
+                    <input class="form-control" ng-model="birthdayFrom" ng-model-options="{ debounce: 250 }" type="text" value="01.01.1970"/>
                 </datepicker>
             </div>
             <div class="form-group" style="padding-bottom: 30px">
                 <label>Дата рождения до:</label>
                 <datepicker date-format="dd.MM.yyyy">
-                    <input class="form-control" ng-model="birthdayTo" type="text" value="01.01.2000"/>
+                    <input class="form-control" ng-model="birthdayTo" ng-model-options="{ debounce: 250 }" type="text" value="01.01.2000"/>
                 </datepicker>
             </div>
         </form>
