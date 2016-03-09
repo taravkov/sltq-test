@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.taravkov.test.domain.Employee;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -14,8 +15,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             "where upper(e.lastName) like upper(?1) " +
             "and upper(e.firstName) like upper(?2) " +
             "and upper(e.middleName) like upper(?3) " +
-            "and upper(e.position.name) like upper(?4)";
+            "and upper(e.position.name) like upper(?4) " +
+            "and e.birthday >= ?5 and e.birthday <= ?6";
 
     @Query(query)
-    List<Employee> filterQuery(String lastName, String firstName, String middleName, String position);
+    List<Employee> filterQuery(String lastName, String firstName, String middleName,
+                               String position, LocalDate birthdayFrom, LocalDate birthdayTo);
 }

@@ -9,7 +9,8 @@ angular.module('table', [ 'ngResource' ])
             return $resource(endpoint, { }, {
                 readAll: {
                     method: 'GET',
-                    url: endpoint + '?lastName=:lastName&firstName=:firstName&middleName=:middleName&position=:position',
+                    url: endpoint + '?lastName=:lastName&firstName=:firstName&middleName=:middleName' +
+                    '&position=:position&birthdayFrom=:birthdayFrom&birthdayTo=:birthdayTo',
                     isArray: true
                 }
             });
@@ -25,7 +26,9 @@ angular.module('table', [ 'ngResource' ])
                         lastName: $scope.lastName,
                         firstName: $scope.firstName,
                         middleName: $scope.middleName,
-                        position: $scope.position
+                        position: $scope.position,
+                        birthdayFrom: $scope.birthdayFrom,
+                        birthdayTo: $scope.birthdayTo
                     },
                     function (employees) {
                         $scope.employees = employees;
@@ -36,6 +39,8 @@ angular.module('table', [ 'ngResource' ])
             };
 
             $scope.search();
+            $scope.birthdayFrom = '01.01.1970';
+            $scope.birthdayTo = '01.01.2000';
 
             $scope.$watch('lastName', function(val, oldVal) {
                 if(val != oldVal) {
@@ -61,10 +66,16 @@ angular.module('table', [ 'ngResource' ])
                 }
             });
 
-            //$scope.$watch('middleName', function(val, oldVal) {
-            //    if(val != oldVal) {
-            //        $scope.search();
-            //    }
-            //});
+            $scope.$watch('birthdayFrom', function(val, oldVal) {
+                if(val != oldVal) {
+                    $scope.search();
+                }
+            });
+
+            $scope.$watch('birthdayTo', function(val, oldVal) {
+                if(val != oldVal) {
+                    $scope.search();
+                }
+            });
         }
     ]);

@@ -1,6 +1,6 @@
 'use strict';
 
-var testApp = angular.module('testApp', [ 'ngRoute', 'table' ]);
+var testApp = angular.module('testApp', [ 'ngRoute', 'table', '720kb.datepicker' ]);
 
 testApp.config(function($routeProvider, $locationProvider) {
 
