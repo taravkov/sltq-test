@@ -9,7 +9,7 @@ angular.module('table', [ 'ngResource' ])
             return $resource(endpoint, { }, {
                 readAll: {
                     method: 'GET',
-                    url: endpoint,
+                    url: endpoint + '?lastName=:lastName&firstName=:firstName&middleName=:middleName&position=:position',
                     isArray: true
                 }
             });
@@ -21,7 +21,12 @@ angular.module('table', [ 'ngResource' ])
             $scope.employees = { };
 
             $scope.search = function () {
-                TableService.readAll({ },
+                TableService.readAll({
+                        lastName: $scope.lastName,
+                        firstName: $scope.firstName,
+                        middleName: $scope.middleName,
+                        position: $scope.position
+                    },
                     function (employees) {
                         $scope.employees = employees;
                     },
@@ -33,21 +38,33 @@ angular.module('table', [ 'ngResource' ])
             $scope.search();
 
             $scope.$watch('lastName', function(val, oldVal) {
-                if(val && val != oldVal) {
+                if(val != oldVal) {
                     $scope.search();
                 }
             });
 
             $scope.$watch('firstName', function(val, oldVal) {
-                if(val && val != oldVal) {
+                if(val != oldVal) {
                     $scope.search();
                 }
             });
 
             $scope.$watch('middleName', function(val, oldVal) {
-                if(val && val != oldVal) {
+                if(val != oldVal) {
                     $scope.search();
                 }
             });
+
+            $scope.$watch('position', function(val, oldVal) {
+                if(val != oldVal) {
+                    $scope.search();
+                }
+            });
+
+            //$scope.$watch('middleName', function(val, oldVal) {
+            //    if(val != oldVal) {
+            //        $scope.search();
+            //    }
+            //});
         }
     ]);

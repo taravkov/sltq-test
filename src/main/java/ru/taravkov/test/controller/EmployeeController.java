@@ -21,12 +21,14 @@ public class EmployeeController {
     @RequestMapping(path = "/employees", method = RequestMethod.GET)
     public List<Employee> get(@RequestParam(required = false, defaultValue = "") String lastName,
                               @RequestParam(required = false, defaultValue = "") String firstName,
-                              @RequestParam(required = false, defaultValue = "") String middleName) {
+                              @RequestParam(required = false, defaultValue = "") String middleName,
+                              @RequestParam(required = false, defaultValue = "") String position) {
 
         lastName = "%" + lastName.trim() + "%";
         firstName = "%" + firstName.trim() + "%";
         middleName = "%" + middleName.trim() + "%";
+        position = "%" + position.trim() + "%";
 
-        return repository.filterQuery(lastName, firstName, middleName);
+        return repository.filterQuery(lastName, firstName, middleName, position);
     }
 }

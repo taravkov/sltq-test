@@ -13,8 +13,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     final String query = "select e from Employee e " +
             "where upper(e.lastName) like upper(?1) " +
             "and upper(e.firstName) like upper(?2) " +
-            "and upper(e.middleName) like upper(?3)";
+            "and upper(e.middleName) like upper(?3) " +
+            "and upper(e.position.name) like upper(?4)";
 
     @Query(query)
-    List<Employee> filterQuery(String lastName, String firstName, String middleName);
+    List<Employee> filterQuery(String lastName, String firstName, String middleName, String position);
 }
