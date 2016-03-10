@@ -1,6 +1,7 @@
 <div ng-controller="TableCtrl">
     <div class="container-fluid" style="max-width: 380px;">
         <form>
+            <flash-message duration="3000"></flash-message>
             <div class="form-group">
                 <input class="form-control" ng-model="lastName" ng-model-options="{ debounce: 250 }" placeholder="Фамилия...">
             </div>

@@ -1,16 +1,19 @@
 package ru.taravkov.test.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.taravkov.test.domain.Employee;
 import ru.taravkov.test.repository.EmployeeRepository;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
@@ -26,23 +29,31 @@ public class EmployeeController {
                               @RequestParam(required = false, defaultValue = "") String firstName,
                               @RequestParam(required = false, defaultValue = "") String middleName,
                               @RequestParam(required = false, defaultValue = "") String position,
-                              @RequestParam(required = false, defaultValue = "") String birthdayFrom,
-                              @RequestParam(required = false, defaultValue = "") String birthdayTo) {
+                              @RequestParam(required = false, defaultValue = "01.01.1970") String birthdayFrom,
+                              @RequestParam(required = false, defaultValue = "01.01.2000") String birthdayTo) {
 
         lastName = "%" + lastName.trim() + "%";
         firstName = "%" + firstName.trim() + "%";
         middleName = "%" + middleName.trim() + "%";
         position = "%" + position.trim() + "%";
 
-        LocalDate from, to;
-        try {
-            from = LocalDate.parse(birthdayFrom, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-            to = LocalDate.parse(birthdayTo, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        } catch (DateTimeException e) {
-            from = LocalDate.of(1970, 1, 1);
-            to = LocalDate.of(2000, 1, 1);
-        }
+        LocalDate from = LocalDate.parse(birthdayFrom, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        LocalDate to = LocalDate.parse(birthdayTo, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         return repository.filterQuery(lastName, firstName, middleName, position, from, to);
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity<ErrorMessage> handler() {
+        return new ResponseEntity<>(new ErrorMessage("Неверный формат даты"), HttpStatus.BAD_REQUEST);
+    }
+
+    @Getter @Setter
+    private static class ErrorMessage {
+        private String message;
+
+        public ErrorMessage(String message) {
+            this.message = message;
+        }
     }
 }

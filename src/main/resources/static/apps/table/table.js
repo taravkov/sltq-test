@@ -17,8 +17,8 @@ angular.module('table', [ 'ngResource' ])
         }
     ])
 
-    .controller('TableCtrl', ['$scope', 'TableService',
-        function ($scope, TableService) {
+    .controller('TableCtrl', ['$scope', 'TableService', 'Flash',
+        function ($scope, TableService, Flash) {
             $scope.employees = { };
 
             $scope.search = function () {
@@ -34,7 +34,7 @@ angular.module('table', [ 'ngResource' ])
                         $scope.employees = employees;
                     },
                     function (error) {
-                        // TODO handle errors
+                        Flash.create('danger', error.data.message);
                     })
             };
 
